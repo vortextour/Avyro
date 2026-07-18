@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referral Center</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        dark: { bg: '#0B1120', card: '#111827', border: '#1E293B', text1: '#F8FAFC', text2: '#9CA3AF', btn: '#6366F1', btnHover: '#818CF8' },
+                        success: '#10B981', warning: '#F59E0B', danger: '#EF4444', info: '#3B82F6', purple: '#8B5CF6'
+                    },
+                    boxShadow: { 
+                        'soft': '0 4px 20px -2px rgba(0,0,0,0.5)', 
+                        'glow': '0 0 20px rgba(99, 102, 241, 0.3)'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'zoom-in': 'zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+                        'shake': 'shake 0.3s cubic-bezier(.36,.07,.19,.97) both'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        zoomIn: { '0%': { transform: 'scale(0.95)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } },
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #0B1120; color: #F8FAFC; color-scheme: dark; }
+        .glass { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen flex w-full selection:bg-[#6366F1]/30">
+
+    <!-- Mobile Overlay -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden glass transition-opacity opacity-0"></div>
+
+    <!-- Navigation Drawer (Sidebar) -->
+    <aside id="sidebar" class="fixed lg:static top-0 left-0 h-full w-[280px] bg-[#111827] border-r border-[#1E293B] z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col shadow-soft shrink-0">
+        <div class="h-24 flex items-center px-8 shrink-0 border-b border-[#1E293B]">
+            <div class="w-10 h-10 bg-gradient-to-br from-[#6366F1] to-indigo-600 rounded-xl flex items-center justify-center mr-3 shadow-glow">
+                <i class="ph ph-rocket-launch text-xl text-white"></i>
+            </div>
+            <h1 class="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#6366F1] to-indigo-400">Avyro</h1>
+            <button id="closeSidebarBtn" class="ml-auto lg:hidden text-[#9CA3AF] hover:text-white transition-colors">
+                <i class="ph ph-x text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto hide-scrollbar py-6 px-5 space-y-2">
+            <p class="px-4 text-[10px] font-bold text-[#9CA3AF]/60 uppercase tracking-widest mb-2">Main Menu</p>
+            
+            <a href="home.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-squares-four text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Dashboard
+            </a>
+            
+            <!-- Active Menu Item -->
+            <a href="referral-center.html" class="flex items-center px-4 py-3.5 rounded-xl bg-[#6366F1]/20 text-[#818CF8] font-bold transition-all group border border-[#6366F1]/30">
+                <i class="ph ph-users text-xl mr-3"></i> Referral Center
+            </a>
+            
+            <a href="referral-tree.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-tree-structure text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Referral Tree
+            </a>
+            <a href="wallet.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-wallet text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Wallet
+            </a>
+            <a href="profile.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-user-circle text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Profile
+            </a>
+            
+            <div class="pt-6 pb-2">
+                <p class="px-4 text-[10px] font-bold text-[#9CA3AF]/60 uppercase tracking-widest">Help & Info</p>
+            </div>
+            
+            <a href="#" id="supportBtn" target="_blank" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-chats-circle text-xl mr-3 group-hover:scale-110 transition-transform duration-300 text-[#3B82F6]"></i> Support
+            </a>
+            <a href="terms.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-scroll text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Terms & Conditions
+            </a>
+        </div>
+        
+        <div class="p-5 border-t border-[#1E293B] shrink-0">
+            <button id="logoutBtn" class="flex w-full items-center justify-center px-4 py-3.5 rounded-xl text-danger border border-transparent hover:bg-danger/10 transition-all font-bold">
+                <i class="ph ph-sign-out text-xl mr-2"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+        
+        <!-- Sticky Header -->
+        <header class="h-20 lg:h-24 w-full bg-[#111827]/90 glass border-b border-[#1E293B] flex items-center justify-between px-4 lg:px-10 z-30 sticky top-0 shrink-0 shadow-sm">
+            <div class="flex items-center gap-4">
+                <button id="openSidebarBtn" class="lg:hidden p-2.5 rounded-xl bg-gray-800 text-white hover:bg-gray-700 transition-colors">
+                    <i class="ph ph-list text-2xl"></i>
+                </button>
+                <div class="flex items-center gap-2">
+                    <span class="text-xl lg:text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#6366F1] to-indigo-400">Avyro</span>
+                    <span class="hidden sm:block text-[#334155] mx-1">|</span>
+                    <h2 class="hidden sm:block text-lg lg:text-xl font-bold tracking-tight text-[#CBD5E1]">Referral Center</h2>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 sm:gap-5">
+                <!-- Profile Avatar -->
+                <a href="profile.html" class="block h-10 w-10 sm:h-11 sm:w-11 rounded-full border-2 border-[#6366F1]/50 overflow-hidden cursor-pointer hover:border-[#6366F1] transition-colors shrink-0 shadow-md">
+                    <img id="headerAvatar" src="" alt="Profile Initials" class="w-full h-full object-cover hidden">
+                    <div id="headerAvatarSkeleton" class="w-full h-full bg-gray-800 animate-pulse"></div>
+                </a>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="flex-1 overflow-y-auto p-4 lg:p-10 hide-scrollbar scroll-smooth relative">
+            
+            <!-- Network Error State -->
+            <div id="networkError" class="hidden bg-danger/10 border border-danger/20 rounded-2xl p-6 text-center mb-8 animate-fade-in">
+                <i class="ph ph-wifi-x text-4xl text-danger mb-2"></i>
+                <h3 class="text-lg font-bold text-danger">Connection Lost</h3>
+                <p class="text-sm text-danger/80 mb-4">Please check your internet connection and try again.</p>
+                <button onclick="window.location.reload()" class="px-6 py-2 bg-danger text-white rounded-xl font-bold transition-colors shadow-lg">Retry</button>
+            </div>
+
+            <!-- Page Loading Skeleton -->
+            <div id="pageLoader" class="flex flex-col items-center justify-center py-24 animate-fade-in">
+                <i class="ph ph-spinner-gap text-5xl text-[#6366F1] animate-spin mb-4"></i>
+                <p class="font-bold text-[#CBD5E1] text-sm uppercase tracking-wider mt-2">Loading your network...</p>
+            </div>
+
+            <!-- LOCKED STATE (For Inactive Users) -->
+            <div id="referralLockedCard" class="hidden w-full bg-[#111827] rounded-[2rem] p-10 lg:p-16 mb-10 border border-[#1E293B] shadow-soft text-center animate-slide-up">
+                <div class="w-24 h-24 bg-danger/10 rounded-full flex items-center justify-center mx-auto mb-6 border-[4px] border-danger/20">
+                    <i class="ph ph-lock-key text-5xl text-danger"></i>
+                </div>
+                <h2 class="text-3xl font-bold tracking-tight mb-3 text-white">Referral System Locked</h2>
+                <p class="text-[#9CA3AF] max-w-lg mx-auto mb-8 leading-relaxed">
+                    Complete your first deposit and wait for Admin approval to activate your account. Once active, your referral link, code, and network data will be unlocked automatically.
+                </p>
+                <a href="home.html" class="inline-block px-8 py-3.5 bg-[#6366F1] hover:bg-[#818CF8] text-white font-bold rounded-xl shadow-glow transition-transform hover:-translate-y-1">
+                    Go to Dashboard
+                </a>
+            </div>
+
+            <!-- ACTIVE STATE CONTENT -->
+            <div id="referralActiveContent" class="hidden flex-col gap-6 lg:gap-8 pb-10">
+                
+                <!-- Top Actions: Link & Code -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6 animate-slide-up" style="animation-delay: 0.1s;">
+                    
+                    <!-- Beautiful Referral Link Card -->
+                    <div class="bg-gradient-to-br from-[#6366F1] via-indigo-600 to-purple-600 p-6 sm:p-8 rounded-[2rem] shadow-[0_0_30px_rgba(99,102,241,0.3)] border border-white/10 relative overflow-hidden group">
+                        <!-- Decorative background blurs -->
+                        <div class="absolute -top-10 -right-10 w-48 h-48 bg-white/10 rounded-full blur-3xl group-hover:scale-110 transition-transform duration-700 pointer-events-none"></div>
+                        <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-black/10 rounded-full blur-2xl pointer-events-none"></div>
+                        
+                        <div class="relative z-10 text-white">
+                            <h3 class="text-xl font-bold mb-1 flex items-center gap-2"><i class="ph ph-link text-white"></i> Your Referral Link</h3>
+                            <p class="text-indigo-100 text-sm mb-6">Share this premium link to invite members directly to your downline.</p>
+                            
+                            <div class="flex items-center gap-2 bg-black/20 p-2.5 rounded-xl backdrop-blur-md border border-white/20 mb-5 shadow-inner overflow-hidden">
+                                <input type="text" id="refLinkInput" readonly class="bg-transparent w-full px-3 outline-none text-white text-sm font-medium placeholder-white/60 text-ellipsis" value="Loading...">
+                            </div>
+                            
+                            <div class="flex items-center gap-3">
+                                <button id="btnCopyLink" class="flex-1 py-3 bg-white text-indigo-700 hover:bg-indigo-50 font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-base">
+                                    <i class="ph ph-copy text-lg"></i> <span>Copy Link</span>
+                                </button>
+                                <button id="btnQrCode" class="w-12 h-12 bg-black/20 hover:bg-black/40 text-white rounded-xl flex items-center justify-center transition-all border border-white/20 shrink-0 shadow-lg backdrop-blur-md" title="Generate QR Code">
+                                    <i class="ph ph-qr-code text-2xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Referral Code Card -->
+                    <div class="bg-[#111827] p-6 sm:p-8 rounded-[2rem] border border-[#1E293B] shadow-soft relative overflow-hidden group">
+                        <div class="relative z-10">
+                            <h3 class="text-xl font-bold mb-1 flex items-center gap-2 text-white"><i class="ph ph-tag text-[#6366F1]"></i> Your Referral Code</h3>
+                            <p class="text-[#9CA3AF] text-sm mb-6">Users can enter this code manually during registration.</p>
+                            
+                            <div class="flex items-center justify-center bg-gray-800/50 p-4 rounded-xl border border-gray-700 mb-5 overflow-hidden">
+                                <input type="text" id="refCodeInput" readonly class="bg-transparent w-full outline-none font-black text-center text-[#818CF8] uppercase transition-all duration-300 text-ellipsis" value="-----">
+                            </div>
+                            
+                            <div class="flex items-center gap-3">
+                                <button id="btnCopyCode" class="w-full py-4 bg-[#6366F1] hover:bg-[#818CF8] text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-glow text-base">
+                                    <i class="ph ph-copy text-xl"></i> <span>Copy Referral Code</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commission Plan Section -->
+                <div class="animate-slide-up" style="animation-delay: 0.2s;">
+                    <h3 class="text-lg font-bold tracking-tight mb-4 text-white flex items-center gap-2"><i class="ph ph-chart-line-up text-success"></i> Commission Plan Structure</h3>
+                    
+                    <div class="flex flex-col gap-4">
+                        <!-- Level 1 Full Width Grid -->
+                        <div class="bg-[#111827] p-6 md:p-8 rounded-[1.5rem] border border-[#1E293B] shadow-soft flex flex-col sm:flex-row items-center justify-between gap-4 hover:shadow-lg transition-shadow text-center sm:text-left">
+                            <div class="flex flex-col sm:flex-row items-center gap-4">
+                                <div class="w-16 h-16 bg-success/10 text-success rounded-full flex items-center justify-center shrink-0"><i class="ph ph-medal text-4xl"></i></div>
+                                <div>
+                                    <p class="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-0.5">Direct Referral</p>
+                                    <p class="text-xl font-bold text-white">Level 1</p>
+                                </div>
+                            </div>
+                            <h4 class="text-5xl font-black text-success">50%</h4>
+                        </div>
+                        
+                        <!-- Level 2 & 3 Side by Side Grid -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-[#111827] p-6 rounded-[1.5rem] border border-[#1E293B] shadow-soft text-center hover:shadow-lg transition-shadow">
+                                <div class="w-12 h-12 mx-auto bg-info/10 text-info rounded-full flex items-center justify-center mb-3"><i class="ph ph-medal text-2xl"></i></div>
+                                <p class="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-1">Indirect (Level 2)</p>
+                                <h4 class="text-3xl font-black text-info">10%</h4>
+                            </div>
+                            <div class="bg-[#111827] p-6 rounded-[1.5rem] border border-[#1E293B] shadow-soft text-center hover:shadow-lg transition-shadow">
+                                <div class="w-12 h-12 mx-auto bg-purple/10 text-purple rounded-full flex items-center justify-center mb-3"><i class="ph ph-medal text-2xl"></i></div>
+                                <p class="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-1">Indirect (Level 3)</p>
+                                <h4 class="text-3xl font-black text-purple">5%</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- End Active State Content -->
+        </div>
+    </main>
+
+    <!-- Centered QR Code Modal -->
+    <div id="qrModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative w-full max-w-sm bg-[#111827] rounded-[2rem] shadow-2xl border border-[#1E293B] overflow-hidden flex flex-col animate-zoom-in text-center p-8">
+            <button id="closeQrBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-[#9CA3AF] hover:text-danger transition-colors"><i class="ph ph-x font-bold"></i></button>
+            
+            <h3 class="text-xl font-bold mb-1 mt-2 text-white">Your QR Code</h3>
+            <p class="text-xs text-[#CBD5E1] mb-6">Scan this to register directly under your network.</p>
+            
+            <div class="bg-white p-4 rounded-2xl shadow-inner border border-gray-200 inline-block mb-6 mx-auto">
+                <img id="qrImage" src="" alt="QR Code" class="w-48 h-48 mx-auto skeleton-text">
+            </div>
+            
+            <button id="btnDownloadQr" class="w-full py-3.5 bg-[#6366F1] hover:bg-[#818CF8] text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-glow">
+                <i class="ph ph-download-simple text-lg"></i> Download QR
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container (Top Center positioned) -->
+    <div id="toastContainer" class="fixed top-6 left-1/2 -translate-x-1/2 z-[110] flex flex-col gap-3 pointer-events-none items-center w-full max-w-sm px-4"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="validation.js"></script>
+    <script type="module" src="referral-center.js"></script>
+</body>
+</html>

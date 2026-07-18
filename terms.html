@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        dark: { bg: '#0B1120', card: '#111827', border: '#1E293B', text1: '#F8FAFC', text2: '#9CA3AF', btn: '#6366F1', btnHover: '#818CF8' },
+                        success: '#10B981', warning: '#F59E0B', danger: '#EF4444', info: '#3B82F6', purple: '#8B5CF6'
+                    },
+                    boxShadow: { 
+                        'soft': '0 4px 20px -2px rgba(0,0,0,0.05)', 
+                        'glow': '0 0 20px rgba(99, 102, 241, 0.3)',
+                        'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'zoom-in': 'zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        zoomIn: { '0%': { transform: 'scale(0.95)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #0B1120; color: #F8FAFC; color-scheme: dark; }
+        .glass { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Typography specifics for reading */
+        .reading-content h3 { font-size: 1.25rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 1rem; color: #fff; display: flex; align-items: center; gap: 0.5rem; }
+        .reading-content h3 .step-num { display:flex; align-items:center; justify-content:center; width: 28px; height: 28px; background: rgba(99, 102, 241, 0.15); color: #818CF8; border-radius: 8px; font-size: 0.85rem; font-weight: 900; }
+        .reading-content p { margin-bottom: 1rem; line-height: 1.8; font-size: 0.95rem; color: #9CA3AF; }
+        .reading-content ul { list-style-type: none; padding-left: 0; margin-bottom: 1.5rem; line-height: 1.75; }
+        .reading-content ul li { position: relative; padding-left: 1.75rem; margin-bottom: 0.75rem; font-size: 0.95rem; color: #CBD5E1; }
+        .reading-content ul li::before { content: '✓'; position: absolute; left: 0; color: #6366F1; font-weight: bold; font-size: 1rem; top: 0px; font-family: 'Phosphor'; }
+        .reading-content strong { color: #F8FAFC; font-weight: 700; }
+    </style>
+</head>
+<body class="min-h-screen flex w-full selection:bg-[#6366F1]/30">
+
+    <!-- Mobile Overlay -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden glass transition-opacity opacity-0"></div>
+
+    <!-- Navigation Drawer (Sidebar) -->
+    <aside id="sidebar" class="fixed lg:static top-0 left-0 h-full w-[280px] bg-[#111827] border-r border-[#1E293B] z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col shadow-soft shrink-0">
+        <div class="h-24 flex items-center px-8 shrink-0 border-b border-[#1E293B]">
+            <div class="w-10 h-10 bg-gradient-to-br from-[#6366F1] to-indigo-600 rounded-xl flex items-center justify-center mr-3 shadow-glow">
+                <i class="ph ph-rocket-launch text-xl text-white"></i>
+            </div>
+            <h1 class="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#6366F1] to-indigo-400">Avyro</h1>
+            <button id="closeSidebarBtn" class="ml-auto lg:hidden text-[#9CA3AF] hover:text-white transition-colors">
+                <i class="ph ph-x text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto hide-scrollbar py-4 px-5 space-y-2">
+            <p class="px-4 text-[10px] font-bold text-[#9CA3AF]/60 uppercase tracking-widest mb-2">Main Menu</p>
+            
+            <a href="home.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-squares-four text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Dashboard
+            </a>
+            <a href="referral-center.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-users text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Referral Center
+            </a>
+            <a href="referral-tree.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-tree-structure text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Referral Tree
+            </a>
+            <a href="wallet.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-wallet text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Wallet
+            </a>
+            <a href="profile.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-user-circle text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Profile
+            </a>
+            
+            <div class="pt-6 pb-2">
+                <p class="px-4 text-[10px] font-bold text-[#9CA3AF]/60 uppercase tracking-widest">Help & Info</p>
+            </div>
+            
+            <a href="#" id="supportBtn" target="_blank" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-chats-circle text-xl mr-3 group-hover:scale-110 transition-transform duration-300 text-[#3B82F6]"></i> Support
+            </a>
+            
+            <!-- Active Menu Item -->
+            <a href="terms.html" class="flex items-center px-4 py-3.5 rounded-xl bg-[#6366F1]/20 text-[#818CF8] font-bold transition-all group border border-[#6366F1]/30">
+                <i class="ph ph-scroll text-xl mr-3"></i> Terms & Conditions
+            </a>
+        </div>
+        
+        <div class="p-5 border-t border-[#1E293B] shrink-0">
+            <button id="logoutBtn" class="flex w-full items-center justify-center px-4 py-3.5 rounded-xl text-danger border border-transparent hover:bg-danger/10 transition-all font-bold">
+                <i class="ph ph-sign-out text-xl mr-2"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden relative" id="mainWrapper">
+        
+        <!-- Sticky Header -->
+        <header class="h-20 lg:h-24 w-full bg-[#111827]/90 glass border-b border-[#1E293B] flex items-center justify-between px-4 lg:px-10 z-30 sticky top-0 shrink-0 shadow-sm">
+            <div class="flex items-center gap-4">
+                <button id="openSidebarBtn" class="lg:hidden p-2.5 rounded-xl bg-gray-800 text-white hover:bg-gray-700 transition-colors">
+                    <i class="ph ph-list text-2xl"></i>
+                </button>
+                <div class="flex items-center gap-2">
+                    <span class="text-xl lg:text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#6366F1] to-indigo-400">Avyro</span>
+                    <span class="hidden sm:block text-[#334155] mx-1">|</span>
+                    <h2 class="hidden sm:block text-lg lg:text-xl font-bold tracking-tight text-[#CBD5E1]">Terms & Conditions</h2>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 sm:gap-5">
+                <!-- Profile Avatar -->
+                <a href="profile.html" class="block h-10 w-10 sm:h-11 sm:w-11 rounded-full border-2 border-[#6366F1]/50 overflow-hidden cursor-pointer hover:border-[#6366F1] transition-colors shrink-0 shadow-md">
+                    <img id="headerAvatar" src="" alt="Profile" class="w-full h-full object-cover hidden">
+                    <div id="headerAvatarSkeleton" class="w-full h-full bg-gray-800 animate-pulse"></div>
+                </a>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div id="scrollArea" class="flex-1 overflow-y-auto p-4 lg:p-10 hide-scrollbar scroll-smooth relative">
+            
+            <!-- Page Loading Skeleton -->
+            <div id="pageLoader" class="flex flex-col items-center justify-center py-24 animate-fade-in">
+                <i class="ph ph-spinner-gap text-5xl text-[#6366F1] animate-spin mb-4"></i>
+                <p class="font-bold text-[#CBD5E1] text-sm uppercase tracking-wider mt-2">Loading Terms...</p>
+            </div>
+
+            <div id="termsContainer" class="hidden flex-col gap-6 lg:gap-8 pb-10">
+                
+                <!-- Page Introduction Card (Hero) -->
+                <div class="bg-[#111827] rounded-[2rem] lg:rounded-[2.5rem] p-8 lg:p-12 relative overflow-hidden shadow-soft border border-[#1E293B] animate-slide-up text-center md:text-left">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-[#6366F1]/5 rounded-full blur-3xl pointer-events-none"></div>
+                    <i class="ph ph-scroll absolute -right-4 -bottom-10 text-[10rem] text-[#6366F1]/5 rotate-12 pointer-events-none hidden md:block"></i>
+                    
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-[#6366F1]/10 rounded-2xl flex items-center justify-center mx-auto md:mx-0 mb-6 shadow-sm border border-[#6366F1]/20 text-[#6366F1]">
+                            <i class="ph ph-shield-check text-3xl"></i>
+                        </div>
+                        <h2 class="text-3xl lg:text-4xl font-black tracking-tight mb-4 text-white">Platform Rules & Policies</h2>
+                        <p class="text-[#9CA3AF] text-sm sm:text-base leading-relaxed max-w-2xl mx-auto md:mx-0">
+                            Welcome to Avyro! Our platform is designed to reward you for building an active network. Please carefully read the operational rules and commission structures before you begin.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Main Grid Layout -->
+                <div class="flex flex-col xl:flex-row gap-6 lg:gap-8 items-start relative animate-slide-up" style="animation-delay: 0.1s;">
+                    
+                    <!-- Left Sidebar: Table of Contents -->
+                    <div id="tableOfContentsCard" class="w-full xl:w-80 shrink-0 bg-[#111827] rounded-[2rem] p-6 border border-[#1E293B] shadow-soft xl:sticky xl:top-[20px] z-10">
+                        <h3 class="text-base font-bold tracking-tight mb-4 flex items-center gap-2 border-b border-[#1E293B] pb-4 text-white">
+                            <i class="ph ph-list-dashes text-[#6366F1]"></i> Contents
+                        </h3>
+                        <ul id="tocList" class="space-y-1.5 max-h-[40vh] xl:max-h-[60vh] overflow-y-auto hide-scrollbar pl-1">
+                            <li><a href="#section-1" class="toc-link block px-4 py-2.5 rounded-xl text-sm font-medium text-[#9CA3AF] hover:bg-gray-800 transition-colors border-l-[3px] border-transparent hover:border-[#6366F1]">1. Account Activation</a></li>
+                            <li><a href="#section-2" class="toc-link block px-4 py-2.5 rounded-xl text-sm font-medium text-[#9CA3AF] hover:bg-gray-800 transition-colors border-l-[3px] border-transparent hover:border-[#6366F1]">2. Commission Structure</a></li>
+                            <li><a href="#section-3" class="toc-link block px-4 py-2.5 rounded-xl text-sm font-medium text-[#9CA3AF] hover:bg-gray-800 transition-colors border-l-[3px] border-transparent hover:border-[#6366F1]">3. Upgrade & Skip Rule</a></li>
+                            <li><a href="#section-4" class="toc-link block px-4 py-2.5 rounded-xl text-sm font-medium text-[#9CA3AF] hover:bg-gray-800 transition-colors border-l-[3px] border-transparent hover:border-[#6366F1]">4. Withdrawal Policy</a></li>
+                            <li><a href="#section-5" class="toc-link block px-4 py-2.5 rounded-xl text-sm font-medium text-[#9CA3AF] hover:bg-gray-800 transition-colors border-l-[3px] border-transparent hover:border-[#6366F1]">5. Fraud & Bans</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Right Content: The Document -->
+                    <div class="flex-1 w-full bg-[#111827] rounded-[2rem] p-6 sm:p-8 lg:p-10 border border-[#1E293B] shadow-soft">
+                        
+                        <div id="termsContentArea" class="reading-content">
+                            
+                            <!-- Section 1 -->
+                            <div id="section-1" class="terms-section mb-10 pb-8 scroll-mt-32 border-b border-[#1E293B] last:border-0 last:pb-0">
+                                <h3><span class="step-num">1</span> Account Registration & Activation</h3>
+                                <p>Creating an account on our platform is completely free. However, your account capabilities depend on its activation status.</p>
+                                <ul>
+                                    <li><strong>Inactive Status:</strong> Newly created accounts are strictly in "Inactive" mode. In this mode, you cannot get your referral link, cannot refer others, and cannot withdraw funds.</li>
+                                    <li><strong>How to Activate:</strong> You must upgrade to at least the "Bronze" plan by depositing the required fee. Once your deposit is reviewed and approved by the admin, your account status changes to <strong class="text-success">Active</strong>.</li>
+                                    <li>Once Active, your dashboard features, Referral Link, and Referral Code will be fully unlocked.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Section 2 -->
+                            <div id="section-2" class="terms-section mb-10 pb-8 scroll-mt-32 border-b border-[#1E293B] last:border-0 last:pb-0">
+                                <h3><span class="step-num">2</span> 3-Level Commission Structure</h3>
+                                <p>Our platform operates on a rewarding 3-level deep Multi-Level Marketing (MLM) network. When a user in your downline upgrades a plan, the fee is instantly distributed into three tiers:</p>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                                    <div class="bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+                                        <p class="text-xs font-bold text-success uppercase tracking-wider mb-1">Level 1 (Direct)</p>
+                                        <h4 class="text-2xl font-black text-white">50%</h4>
+                                        <p class="text-xs text-[#9CA3AF] mt-2">Users who joined directly via your specific referral link or code.</p>
+                                    </div>
+                                    <div class="bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+                                        <p class="text-xs font-bold text-info uppercase tracking-wider mb-1">Level 2 (Indirect)</p>
+                                        <h4 class="text-2xl font-black text-white">10%</h4>
+                                        <p class="text-xs text-[#9CA3AF] mt-2">Users invited by your Level 1 members.</p>
+                                    </div>
+                                    <div class="bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+                                        <p class="text-xs font-bold text-purple uppercase tracking-wider mb-1">Level 3 (Indirect)</p>
+                                        <h4 class="text-2xl font-black text-white">5%</h4>
+                                        <p class="text-xs text-[#9CA3AF] mt-2">Users invited by your Level 2 members.</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm"><em>* The remaining 35% of any transaction is strictly reserved for platform server maintenance and administrative profits.</em></p>
+                            </div>
+
+                            <!-- Section 3 -->
+                            <div id="section-3" class="terms-section mb-10 pb-8 scroll-mt-32 border-b border-[#1E293B] last:border-0 last:pb-0">
+                                <h3><span class="step-num">3</span> Plan Upgrades & "Commission Skip" Rule</h3>
+                                <p>We offer 5 sequential plans: Bronze, Silver, Gold, Platinum, and Diamond. This section outlines the most important rule of the platform.</p>
+                                
+                                <div class="bg-danger/10 border border-danger/20 p-5 rounded-2xl mb-5">
+                                    <h4 class="text-danger font-bold flex items-center gap-2 mb-2"><i class="ph ph-warning-circle text-xl"></i> The "Commission Skip" Rule</h4>
+                                    <p class="text-[#CBD5E1] text-sm !mb-0">
+                                        To receive a commission from a downline's upgrade, <strong>your own account must be on a plan that is equal to or higher than the plan they are purchasing.</strong>
+                                    </p>
+                                </div>
+
+                                <ul>
+                                    <li><strong>Example of Winning:</strong> You are on the "Gold" plan. Your downline upgrades to the "Silver" or "Gold" plan. You will successfully receive the 50% commission.</li>
+                                    <li><strong>Example of Losing (Skip):</strong> You are on the "Bronze" plan. Your downline decides to upgrade to the "Silver" plan. Because your level is lower than theirs, the commission will <strong class="text-danger">SKIP</strong> you entirely and go to the platform profit.</li>
+                                    <li><strong>Advice:</strong> Always ensure you upgrade your own plan ahead of your active downlines to avoid losing massive commissions!</li>
+                                </ul>
+                            </div>
+
+                            <!-- Section 4 -->
+                            <div id="section-4" class="terms-section mb-10 pb-8 scroll-mt-32 border-b border-[#1E293B] last:border-0 last:pb-0">
+                                <h3><span class="step-num">4</span> Withdrawal Policy</h3>
+                                <p>We are committed to providing smooth payouts for your hard work.</p>
+                                <ul>
+                                    <li>Withdrawal requests are strictly available for <strong>Active</strong> users only.</li>
+                                    <li>You must have a sufficient wallet balance to make a request.</li>
+                                    <li>When you submit a withdrawal, the funds are immediately deducted from your available balance and placed in a "Pending" state.</li>
+                                    <li>Our Admin team manually reviews and approves all requests to ensure security. Typical processing time is between 24 to 48 hours.</li>
+                                    <li>If you provide incorrect payment gateway details (wrong account numbers), Avyro holds zero liability for the lost funds. If a request is rejected due to invalid details, the funds will be automatically returned to your wallet.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Section 5 -->
+                            <div id="section-5" class="terms-section mb-10 pb-8 scroll-mt-32 last:border-0 last:pb-0">
+                                <h3><span class="step-num">5</span> Fair Play, Fraud Prevention & Bans</h3>
+                                <p>To maintain a profitable and sustainable ecosystem for all members, strict fair play rules are enforced globally.</p>
+                                <ul>
+                                    <li><strong>No Self-Referral:</strong> You are absolutely forbidden from creating dummy accounts using your own referral link just to extract commission.</li>
+                                    <li><strong>One Account Per User:</strong> Each individual is permitted to operate only one account. Our system tracks IP addresses and Device Fingerprints.</li>
+                                    <li><strong>Zero Tolerance Policy:</strong> Any attempt to hack, manipulate the referral tree, or bypass the payment gateways will trigger an automated security lock.</li>
+                                </ul>
+                                
+                                <div class="bg-gray-800/80 p-4 rounded-xl border border-gray-700 mt-6">
+                                    <p class="text-sm font-medium text-[#CBD5E1] !mb-0">
+                                        <i class="ph ph-shield text-[#6366F1] mr-1"></i> Violation of these terms will result in an immediate, permanent ban. All wallet balances, downline networks, and pending withdrawals tied to a banned account will be instantly confiscated.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div> <!-- End Terms Content -->
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="terms.js"></script>
+</body>
+</html>
