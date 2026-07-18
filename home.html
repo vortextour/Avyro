@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Dashboard</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        dark: { bg: '#0B1120', card: '#111827', border: '#1E293B', text1: '#F8FAFC', text2: '#9CA3AF', btn: '#6366F1', btnHover: '#818CF8' },
+                        success: '#10B981', warning: '#F59E0B', danger: '#EF4444', info: '#3B82F6', purple: '#8B5CF6'
+                    },
+                    boxShadow: { 
+                        'soft': '0 4px 20px -2px rgba(0,0,0,0.5)', 
+                        'glow': '0 0 20px rgba(99, 102, 241, 0.3)'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'zoom-in': 'zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+                        'shake': 'shake 0.3s cubic-bezier(.36,.07,.19,.97) both'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        zoomIn: { '0%': { transform: 'scale(0.95)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } },
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #0B1120; color: #F8FAFC; color-scheme: dark; }
+        .glass { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen flex w-full selection:bg-[#6366F1]/30">
+
+    <!-- Mobile Overlay -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden glass transition-opacity opacity-0"></div>
+
+    <!-- Navigation Drawer (Sidebar) -->
+    <aside id="sidebar" class="fixed lg:static top-0 left-0 h-full w-[280px] bg-[#111827] border-r border-[#1E293B] z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col shadow-soft shrink-0">
+        <div class="h-24 flex items-center px-8 shrink-0 border-b border-[#1E293B]">
+            <div class="w-10 h-10 bg-gradient-to-br from-[#6366F1] to-indigo-600 rounded-xl flex items-center justify-center mr-3 shadow-glow">
+                <i class="ph ph-rocket-launch text-xl text-white"></i>
+            </div>
+            <h1 class="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#6366F1] to-indigo-400">Avyro</h1>
+            <button id="closeSidebarBtn" class="ml-auto lg:hidden text-[#9CA3AF] hover:text-white transition-colors">
+                <i class="ph ph-x text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto hide-scrollbar py-6 px-5 space-y-2">
+            <p class="px-4 text-[10px] font-bold text-[#9CA3AF]/60 uppercase tracking-widest mb-2">Main Menu</p>
+            
+            <a href="home.html" class="flex items-center px-4 py-3.5 rounded-xl bg-[#6366F1]/20 text-[#818CF8] font-bold transition-all group border border-[#6366F1]/30">
+                <i class="ph ph-squares-four text-xl mr-3"></i> Dashboard
+            </a>
+            
+            <a href="referral-center.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-users text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Referral Center
+            </a>
+            <a href="referral-tree.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-tree-structure text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Referral Tree
+            </a>
+            <a href="wallet.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-wallet text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Wallet
+            </a>
+            <a href="profile.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-user-circle text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Profile
+            </a>
+            
+            <div class="pt-6 pb-2">
+                <p class="px-4 text-[10px] font-bold text-[#9CA3AF]/60 uppercase tracking-widest">Help & Info</p>
+            </div>
+            
+            <a href="#" id="supportBtn" target="_blank" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-chats-circle text-xl mr-3 group-hover:scale-110 transition-transform duration-300 text-[#3B82F6]"></i> Support
+            </a>
+            <a href="terms.html" class="flex items-center px-4 py-3.5 rounded-xl text-[#9CA3AF] hover:bg-gray-800 hover:text-white font-medium transition-all group">
+                <i class="ph ph-scroll text-xl mr-3 group-hover:scale-110 transition-transform duration-300"></i> Terms & Conditions
+            </a>
+        </div>
+        
+        <div class="p-5 border-t border-[#1E293B] shrink-0">
+            <button id="logoutBtn" class="flex w-full items-center justify-center px-4 py-3.5 rounded-xl text-danger border border-transparent hover:bg-danger/10 transition-all font-bold">
+                <i class="ph ph-sign-out text-xl mr-2"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+        
+        <!-- Sticky Header -->
+        <header class="h-20 lg:h-24 w-full bg-[#111827]/90 glass border-b border-[#1E293B] flex items-center justify-between px-4 lg:px-10 z-30 sticky top-0 shrink-0 shadow-sm">
+            <div class="flex items-center gap-4">
+                <button id="openSidebarBtn" class="lg:hidden p-2.5 rounded-xl bg-gray-800 text-white hover:bg-gray-700 transition-colors">
+                    <i class="ph ph-list text-2xl"></i>
+                </button>
+                <!-- Brand Name in Header -->
+                <div class="flex items-center gap-2">
+                    <span class="text-xl lg:text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#6366F1] to-indigo-400">Avyro</span>
+                    <span class="hidden sm:block text-[#334155] mx-1">|</span>
+                    <h2 class="hidden sm:block text-lg lg:text-xl font-bold tracking-tight text-[#CBD5E1]">Dashboard</h2>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 sm:gap-5">
+                <!-- Profile Avatar Icon (Dynamically Generated Initials) -->
+                <a href="profile.html" class="block h-10 w-10 sm:h-11 sm:w-11 rounded-full border-2 border-[#6366F1]/50 overflow-hidden cursor-pointer hover:border-[#6366F1] transition-colors shrink-0 shadow-md">
+                    <img id="headerAvatar" src="" alt="Profile Initials" class="w-full h-full object-cover hidden">
+                    <div id="headerAvatarSkeleton" class="w-full h-full bg-gray-800 animate-pulse"></div>
+                </a>
+            </div>
+        </header>
+
+        <!-- Dashboard Content Area -->
+        <div class="flex-1 overflow-y-auto p-4 lg:p-10 hide-scrollbar scroll-smooth relative">
+            
+            <!-- Network Error State -->
+            <div id="networkError" class="hidden bg-danger/10 border border-danger/20 rounded-2xl p-6 text-center mb-8 animate-fade-in">
+                <i class="ph ph-wifi-x text-4xl text-danger mb-2"></i>
+                <h3 class="text-lg font-bold text-danger">Connection Lost</h3>
+                <p class="text-sm text-danger/80 mb-4">Please check your internet connection.</p>
+                <button onclick="window.location.reload()" class="px-6 py-2 bg-danger text-white rounded-xl font-bold transition-colors shadow-lg">Retry</button>
+            </div>
+
+            <!-- Page Loading Skeleton -->
+            <div id="pageLoader" class="flex flex-col items-center justify-center py-24 animate-fade-in">
+                <i class="ph ph-spinner-gap text-5xl text-[#6366F1] animate-spin mb-4"></i>
+                <p class="font-bold text-[#CBD5E1] text-sm uppercase tracking-wider mt-2">Loading Dashboard...</p>
+            </div>
+
+            <div id="dashboardContent" class="hidden flex-col gap-6 pb-10 mt-2">
+                
+                <!-- PLAN UPGRADE BANNER (Dynamic Color based on status) -->
+                <div id="planBanner" class="w-full rounded-[2.5rem] p-8 lg:p-10 border border-white/10 shadow-2xl animate-slide-up relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 transition-all duration-500 group">
+                    <!-- Glassmorphism Orbs -->
+                    <div class="absolute -top-20 -right-20 w-64 h-64 bg-white/20 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-700"></div>
+                    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-black/20 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent z-0"></div>
+                    
+                    <div class="relative z-10 flex flex-col md:flex-row items-center gap-6 w-full md:w-auto text-center md:text-left text-white">
+                        <div class="w-24 h-24 rounded-[1.5rem] flex items-center justify-center shrink-0 bg-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/20 backdrop-blur-md transform group-hover:rotate-6 transition-transform duration-500">
+                            <i id="planIcon" class="ph ph-crown text-5xl drop-shadow-md"></i>
+                        </div>
+                        <div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-md mb-3">
+                                <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                                <p class="text-[10px] font-bold uppercase tracking-widest opacity-100" id="planSubTitle">Current Plan</p>
+                            </div>
+                            <h3 id="planTitle" class="text-4xl lg:text-5xl font-black tracking-tight uppercase text-transparent bg-clip-text bg-gradient-to-br from-white to-white/70 drop-shadow-sm">Inactive</h3>
+                            <p id="planDesc" class="text-sm text-white/90 mt-3 hidden max-w-md font-medium leading-relaxed">Activate your account to unlock full platform access, referrals, and withdrawals.</p>
+                        </div>
+                    </div>
+                    
+                    <button id="upgradeNowBtn" class="w-full md:w-auto px-8 py-4 bg-white text-gray-900 font-black uppercase tracking-widest text-sm rounded-2xl shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:shadow-[0_0_60px_rgba(255,255,255,0.6)] hover:-translate-y-1 transition-all duration-300 relative z-10 ripple">
+                        Activate Account
+                    </button>
+                </div>
+
+                <!-- Contextual Financial Overview Cards -->
+                <div class="grid grid-cols-2 gap-4 lg:gap-6 animate-slide-up" style="animation-delay: 0.1s;">
+                    
+                    <!-- Wallet Balance -->
+                    <div class="bg-[#1E293B] p-4 lg:p-6 rounded-2xl lg:rounded-[1.5rem] border border-[#334155] shadow-soft flex flex-col items-center text-center overflow-hidden">
+                        <div class="w-12 h-12 bg-info/10 rounded-full flex items-center justify-center text-[#3B82F6] mb-3 shrink-0"><i class="ph ph-wallet text-2xl"></i></div>
+                        <p class="text-[10px] sm:text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-1">Wallet Balance</p>
+                        <h4 id="statWallet" class="font-black text-white w-full truncate transition-all duration-300">৳0.00</h4>
+                    </div>
+
+                    <!-- Referral Bonus -->
+                    <div class="bg-[#1E293B] p-4 lg:p-6 rounded-2xl lg:rounded-[1.5rem] border border-[#334155] shadow-soft flex flex-col items-center text-center overflow-hidden">
+                        <div class="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center text-[#10B981] mb-3 shrink-0"><i class="ph ph-gift text-2xl"></i></div>
+                        <p class="text-[10px] sm:text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-1">Total Bonus</p>
+                        <h4 id="statRefBonus" class="font-black text-white w-full truncate transition-all duration-300">৳0.00</h4>
+                    </div>
+
+                    <!-- Total Deposit -->
+                    <div class="bg-[#1E293B] p-4 lg:p-6 rounded-2xl lg:rounded-[1.5rem] border border-[#334155] shadow-soft flex flex-col items-center text-center overflow-hidden">
+                        <div class="w-12 h-12 bg-cyan-500/10 rounded-full flex items-center justify-center text-cyan-500 mb-3 shrink-0"><i class="ph ph-arrow-down-left text-2xl"></i></div>
+                        <p class="text-[10px] sm:text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-1">Total Deposited</p>
+                        <h4 id="statTotalDeposit" class="font-black text-white w-full truncate transition-all duration-300">৳0.00</h4>
+                    </div>
+
+                    <!-- Total Withdraw -->
+                    <div class="bg-[#1E293B] p-4 lg:p-6 rounded-2xl lg:rounded-[1.5rem] border border-[#334155] shadow-soft flex flex-col items-center text-center overflow-hidden">
+                        <div class="w-12 h-12 bg-rose-500/10 rounded-full flex items-center justify-center text-rose-500 mb-3 shrink-0"><i class="ph ph-arrow-up-right text-2xl"></i></div>
+                        <p class="text-[10px] sm:text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-1">Total Withdrawn</p>
+                        <h4 id="statTotalWithdraw" class="font-black text-white w-full truncate transition-all duration-300">৳0.00</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- PLAN UPGRADE MODAL -->
+    <div id="upgradeModalOverlay" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity"></div>
+        
+        <div class="relative w-full max-w-md bg-[#111827] rounded-[2rem] shadow-2xl border border-[#1E293B] overflow-hidden flex flex-col max-h-[90vh] animate-zoom-in">
+            
+            <div class="p-5 border-b border-gray-800 flex justify-between items-center bg-[#1E293B] shrink-0">
+                <h3 class="font-bold text-lg text-white flex items-center gap-2"><i id="upgradeModalIcon" class="ph ph-trend-up text-[#6366F1] text-xl"></i> <span id="upgradeModalTitleText">Plan Upgrade</span></h3>
+                <button id="closeUpgradeBtn" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-[#9CA3AF] hover:text-danger transition-colors"><i class="ph ph-x font-bold"></i></button>
+            </div>
+
+            <div id="upgradeFormError" class="hidden mx-6 mt-6 p-3 rounded-xl bg-danger/10 border border-danger/25 text-danger text-xs font-semibold items-center gap-2.5 animate-fade-in break-words">
+                <i class="ph ph-warning-octagon text-lg shrink-0"></i>
+                <span id="upgradeFormErrorMsg"></span>
+            </div>
+
+            <div class="p-6 pt-4 overflow-y-auto hide-scrollbar text-white">
+                
+                <!-- Step 1: Info & Gateway -->
+                <div id="upgradeStep1">
+                    <div class="text-center mb-6 bg-[#111827] p-5 rounded-2xl border border-gray-800 shadow-inner">
+                        <p id="modalActionType" class="text-[10px] text-[#9CA3AF] font-bold uppercase tracking-widest mb-1.5">Upgrading To</p>
+                        <h2 id="modalNextPlanName" class="text-3xl font-black uppercase text-[#6366F1] tracking-widest mb-2 drop-shadow-sm">Silver</h2>
+                        <p id="modalFeeText" class="text-sm font-bold text-[#9CA3AF]">Upgrade Fee: <span id="modalNextPlanPrice" class="text-success font-black text-xl ml-1">৳0</span></p>
+                    </div>
+
+                    <!-- Rules Banner in Bengali -->
+                    <div class="bg-[#6366F1]/10 p-5 sm:p-6 rounded-2xl border border-[#6366F1]/20 text-left mb-6 shadow-sm">
+                        <h4 class="text-sm font-bold text-[#818CF8] mb-3 flex items-center gap-1.5"><i class="ph ph-info text-xl"></i> কমিশন শর্তাবলী:</h4>
+                        <p class="text-[13px] text-[#CBD5E1] leading-relaxed space-y-2">
+                            <span>আপনি যখন আপগ্রেড করবেন, আপনার ফি থেকে <strong>৫০% (L1)</strong>, <strong>১০% (L2)</strong> এবং <strong>৫% (L3)</strong> আপলাইনদের দেওয়া হবে।</span>
+                            <br><br>
+                            <span class="text-danger font-semibold bg-danger/10 px-2 py-0.5 rounded border border-danger/20">শর্ত:</span> 
+                            <span class="leading-loose">আপনার ডাউনলাইন কেউ আপগ্রেড করলে আপনি তখনই কমিশন পাবেন, যদি আপনার নিজেরও উক্ত লেভেল বা তার উপরের লেভেল আনলক করা থাকে। অন্যথায় কমিশন স্কিপ হয়ে যোগ্য আপলাইনের কাছে চলে যাবে।</span>
+                        </p>
+                    </div>
+
+                    <p class="text-xs font-bold text-[#9CA3AF] uppercase tracking-widest mb-3 pl-1">Select Payment Gateway</p>
+                    <div id="paymentMethodsContainer" class="space-y-3 mb-6">
+                        <div class="p-4 bg-gray-800 rounded-2xl animate-pulse h-20 w-full border border-gray-700"></div>
+                    </div>
+                    
+                    <button id="btnStep1" class="w-full py-4 rounded-2xl bg-[#6366F1] text-white font-bold opacity-50 cursor-not-allowed transition-all duration-300 text-base flex justify-center items-center gap-2">
+                        <span>Proceed to Pay</span> <i class="ph ph-arrow-right font-bold"></i>
+                    </button>
+                </div>
+
+                <!-- Step 2: Payment Details -->
+                <div id="upgradeStep2" class="hidden">
+                    <button class="btnBack text-xs font-bold text-[#9CA3AF] hover:text-white mb-5 flex items-center gap-1.5 bg-gray-800 px-3.5 py-2 rounded-xl w-max transition-colors"><i class="ph ph-arrow-left"></i> Back</button>
+                    
+                    <div class="bg-gray-800/40 p-5 rounded-2xl border border-gray-700 mb-6 space-y-3">
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-700/50">
+                            <span class="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider">Gateway</span> 
+                            <span id="selMethodName" class="font-bold text-sm text-white">--</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-700/50">
+                            <span class="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider">Amount to Send</span> 
+                            <span id="selAmountDisplay" class="font-black text-lg text-success drop-shadow-md">৳0</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-1">
+                            <span class="text-xs font-bold text-[#9CA3AF] uppercase tracking-wider">Send Payment To</span> 
+                            <button class="copy-btn font-bold text-sm text-[#818CF8] bg-[#6366F1]/10 hover:bg-[#6366F1]/20 border border-[#6366F1]/30 px-3 py-1.5 rounded-lg shadow-sm transition-colors flex items-center gap-1.5" title="Click to copy">
+                                <span id="selNumber">--</span> <i class="ph ph-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div id="depAmountContainer" class="transition-all duration-300 opacity-60">
+                            <label class="block text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-1.5">Deposit Amount (Fixed)</label>
+                            <div class="relative group">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 font-black text-[#9CA3AF]">৳</span>
+                                <input type="number" id="depAmount" class="w-full pl-8 pr-4 py-3.5 rounded-2xl bg-gray-800 border border-gray-700 text-[#9CA3AF] font-bold text-base cursor-not-allowed" readonly>
+                                <i class="ph ph-lock-key absolute right-4 top-1/2 -translate-y-1/2 text-[#9CA3AF]"></i>
+                            </div>
+                        </div>
+
+                        <div id="depTrxIdContainer" class="transition-all duration-300">
+                            <label class="block text-xs font-bold text-[#9CA3AF] uppercase tracking-wider mb-1.5">Transaction ID <span class="text-danger">*</span></label>
+                            <div class="relative group">
+                                <i class="ph ph-hash absolute left-4 top-1/2 -translate-y-1/2 text-[#9CA3AF] text-lg group-focus-within:text-[#6366F1] transition-colors"></i>
+                                <input type="text" id="depTrxId" class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-[#0B1120]/50 border border-[#1E293B] focus:ring-4 focus:ring-[#6366F1]/15 focus:border-[#6366F1] outline-none font-bold text-base uppercase tracking-wider transition-all text-white placeholder-gray-600" placeholder="e.g. TRX123456789" required>
+                            </div>
+                            <p id="depTrxIdError" class="text-danger text-xs font-semibold mt-1.5 hidden flex items-center gap-1 break-words"></p>
+                        </div>
+                    </div>
+                    <button id="btnStep2" class="w-full mt-8 py-4 rounded-2xl bg-[#6366F1] hover:bg-[#818CF8] text-white font-bold shadow-glow hover:shadow-[0_0_25px_rgba(99,102,241,0.6)] transition-all duration-300 text-base">Submit Request</button>
+                </div>
+
+                <!-- Step 3: Confirmation -->
+                <div id="upgradeStep3" class="hidden text-center transition-all duration-300 py-6">
+                    <div class="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-5 border-[4px] border-success/20">
+                        <i class="ph ph-check-circle text-4xl text-success"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">Request Submitted!</h3>
+                    <p class="text-sm text-[#9CA3AF] mb-8 leading-relaxed max-w-xs mx-auto">Your payment request is pending admin approval. Your account will be upgraded shortly.</p>
+                    <button class="close-modal w-full py-4 rounded-2xl bg-gray-800 hover:bg-gray-700 text-white font-bold transition-colors text-base">Return to Dashboard</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container (Top Center) -->
+    <div id="toastContainer" class="fixed top-6 left-1/2 -translate-x-1/2 z-[110] flex flex-col gap-3 pointer-events-none items-center w-full max-w-sm px-4"></div>
+
+    <!-- Scripts -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="validation.js"></script>
+    <script type="module" src="home.js"></script>
+</body>
+</html>
