@@ -109,7 +109,7 @@ if (urlParams.has('ref')) {
 }
 
 applyDefaultCodeBtn.addEventListener('click', () => {
-    fields.referralCode.value = "SM1";
+    fields.referralCode.value = "AV1";
     fields.referralCode.dispatchEvent(new Event('input'));
 });
 
@@ -280,7 +280,7 @@ form.addEventListener('submit', async (e) => {
             nextSeq = counterDoc.data().userSequence + 1;
         }
 
-        const generatedRefCode = "SM" + nextSeq;
+        const generatedRefCode = "AV" + nextSeq;
         transaction.set(counterRef, { userSequence: nextSeq }, { merge: true });
 
         transaction.set(userRef, {
