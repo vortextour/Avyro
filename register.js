@@ -242,24 +242,23 @@ form.addEventListener('submit', async (e) => {
     if (!uniqueChecks[2]) { setStatus('phone', 'error', 'Phone number is already in use.'); applyShake('phoneFieldContainer'); throw new Error('Phone number is already in use.'); }
     if (!uniqueChecks[3]) { setStatus('referralCode', 'error', 'Invalid or Non-existent Referral Code.'); applyShake('referralCodeFieldContainer'); throw new Error('Invalid or Non-existent Referral Code.'); }
     
-    // UPLINE CHAIN BUILDER (Magic Logic for 1-Read Tree Sync)
     let uplineChainArray = [];
     if (ref && ref !== MASTER_CODE) {
-        uplineChainArray.push(ref); // Level 1
+        uplineChainArray.push(ref); 
         try {
             const q1 = query(collection(db, "users"), where("referralCode", "==", ref));
             const s1 = await getDocs(q1);
             if (!s1.empty) {
                 const u1 = s1.docs[0].data();
                 if (u1.uplineReferralCode && u1.uplineReferralCode !== MASTER_CODE) {
-                    uplineChainArray.push(u1.uplineReferralCode); // Level 2
+                    uplineChainArray.push(u1.uplineReferralCode); 
                     
                     const q2 = query(collection(db, "users"), where("referralCode", "==", u1.uplineReferralCode));
                     const s2 = await getDocs(q2);
                     if (!s2.empty) {
                         const u2 = s2.docs[0].data();
                         if (u2.uplineReferralCode && u2.uplineReferralCode !== MASTER_CODE) {
-                            uplineChainArray.push(u2.uplineReferralCode); // Level 3
+                            uplineChainArray.push(u2.uplineReferralCode); 
                         }
                     }
                 }
@@ -275,14 +274,22 @@ form.addEventListener('submit', async (e) => {
 
     await runTransaction(db, async (transaction) => {
         const counterDoc = await transaction.get(counterRef);
-        let nextSeq = 1;
-        if (counterDoc.exists() && counterDoc.data().userSequence) {
-            nextSeq = counterDoc.data().userSequence + 1;
+        let nextSeq = 1; // Default
+        
+        // Bulletproof Counter Increment Logic
+        if (counterDoc.exists()) {
+            const data = counterDoc.data();
+            if (data && data.userSequence !== undefined) {
+                nextSeq = Number(data.userSequence) + 1;
+            }
         }
 
         const generatedRefCode = "AV" + nextSeq;
+        
+        // Save the new incremented sequence safely
         transaction.set(counterRef, { userSequence: nextSeq }, { merge: true });
 
+        // Save User Details
         transaction.set(userRef, {
             uid: authUser.uid,
             fullName: name,
@@ -291,11 +298,14 @@ form.addEventListener('submit', async (e) => {
             phoneNumber: phone,
             referralCode: generatedRefCode,
             uplineReferralCode: ref, 
-            uplineChain: uplineChainArray, // The 1-Read Magic Array!
+            uplineChain: uplineChainArray,
             status: "Inactive",
             walletBalance: 0,
             totalReferralBonus: 0,
             successfulReferrals: 0,
+            totalDeposit: 0,
+            totalWithdraw: 0,
+            planLevel: 0,
             profilePhoto: "https://ui-avatars.com/api/?name=" + encodeURIComponent(name) + "&background=6366F1&color=fff",
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp(),
